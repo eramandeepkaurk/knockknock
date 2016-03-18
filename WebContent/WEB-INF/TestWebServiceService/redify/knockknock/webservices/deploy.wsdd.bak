@@ -1,0 +1,30 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from TestWebServiceService WSDL service -->
+
+  <service name="TestWebService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://webservices.knockknock.redify"/>
+      <parameter name="wsdlServiceElement" value="TestWebServiceService"/>
+      <parameter name="schemaQualified" value="http://webservices.knockknock.redify"/>
+      <parameter name="wsdlServicePort" value="TestWebService"/>
+      <parameter name="className" value="redify.knockknock.webservices.TestWebServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="TestWebService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="concatStringsAndReturnCode" qname="operNS:concatStringsAndReturnCode" xmlns:operNS="http://webservices.knockknock.redify" returnQName="retNS:concatStringsAndReturnCodeReturn" xmlns:retNS="http://webservices.knockknock.redify" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:string1" xmlns:pns="http://webservices.knockknock.redify" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:string2" xmlns:pns="http://webservices.knockknock.redify" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="concatStringsAndReturnCode"/>
+
+  </service>
+</deployment>
